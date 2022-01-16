@@ -3,13 +3,13 @@ This README.md file provides details for kafka-to-spark pipeline installment loc
 
 # Local installment
 
-1) launching zookeeper:
+1) Launching zookeeper:
 
 /usr/local/zookeeper/zookeeper-3.7.0/bin/zkServer.sh start
 
 this command starts up zookeeper on port 2181.
 
-2) launching kafka server in daemon mode:
+2) Launching kafka server in daemon mode:
 
 /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
 
