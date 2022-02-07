@@ -1,0 +1,2 @@
+kafka-python==1.4.6
+json5==0.9.6
