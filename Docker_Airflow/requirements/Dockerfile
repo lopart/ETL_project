@@ -9,7 +9,7 @@ RUN pip install --user psycopg2-binary && \
     pip install --user psycopg2
 RUN mkdir -p /usr/share/man/man1
 
-# Java installation
+# Java installation (openjdk-8-jdk is depreciated)
 RUN apt-get update && \
     apt-get install -y openjdk-11-jdk && \
     apt-get install -y ant && \
