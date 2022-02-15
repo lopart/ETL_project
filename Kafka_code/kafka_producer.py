@@ -9,7 +9,7 @@ producer = KafkaProducer(bootstrap_servers=['kafka:9092'],
 			value_serializer=json_serializer,
 			api_version=(1,4,6))
 
-with open("/usr/local/airflow/data/input_file.json") as f:
+with open("/usr/local/airflow/data/input_file.json") as f: # folder location specified in docker
 	data_object = json.load(f)	
 	for odd in data_object['odds']:
 		producer.send("test",odd)
