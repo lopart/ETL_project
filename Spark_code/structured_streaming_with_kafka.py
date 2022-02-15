@@ -30,17 +30,13 @@ if __name__ == '__main__':
 		)))])
 
 
-	df = spark.readStream.format("kafka").option("kafka.bootstrap.servers",'localhost:9092').option("subscribe",'test').option("startingOffset", "earliest").load()
+	df = spark.readStream.format("kafka").option("kafka.bootstrap.servers",'kafka:9092').option("subscribe",'test').option("startingOffsets", "earliest").load()
 	df = df.selectExpr("CAST(value AS STRING)")
 	df = df.select(from_json(df.value, schema1).alias("data")).withColumn("bookmaker", explode("data.bookmakers")).withColumn("market", explode("bookmaker.markets")).withColumn("outcome", explode("market.outcomes")).selectExpr("data.id", "bookmaker.title", "market.key", "outcome.*")
 
-	final_df = df.writeStream.trigger(processingTime='20 seconds').option("checkpointLocation", "/private/tmp/kafka_output").option("path", "/private/tmp/kafka_output").format("csv").outputMode("append").start()
-
-	# .option("truncate","false") 
-	# .format("memory")
-	# .queryName("sql_1")
-	# .option("checkpointLocation", "/private/tmp/kafka_output")
-	# .option("path", "/private/tmp/kafka_output")
+	
+	# Uncomment if you want to taste an output from Structured Streaming
+	# final_df = df.writeStream.trigger(processingTime='20 seconds').format("console").outputMode("append").start()
 
 
 	final_df.awaitTermination()
