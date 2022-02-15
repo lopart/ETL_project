@@ -1,5 +1,6 @@
 # kafka_spark_project
 This README.md file provides details for kafka-to-spark pipeline installment locally and remotelly by using both Apache Airflow and Docker.
+![alt_text](https://github.com/Gitnuts/kafka_spark_project/blob/main/schema.png)
 
 # Local installment
 
