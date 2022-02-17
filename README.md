@@ -1,5 +1,5 @@
-# ETL_project
-This README.md file provides details for kafka-to-spark pipeline installment locally and remotely by using both Apache Airflow and Docker.
+# ETL_project (under construction)
+This README.md file provides details for kafka-to-spark pipeline instalment locally and remotely by using both Apache Airflow and Docker.
 ![alt_text](https://github.com/Gitnuts/kafka_spark_project/blob/main/schema.png)
 
 # Local instalment
