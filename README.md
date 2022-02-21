@@ -1,6 +1,6 @@
 # ETL_project (under construction)
 This ```README.md``` file provides details for ETL pipeline instalment locally and remotely by using Docker. It includes Apache Kafka, Apache Spark and Apache Airflow for message queuing, structured streaming and workflow scheduling, respectively. For end systems, Apache Hadoop (particularly HDFS file system) and AWS S3 cloud storage were exploited. 
-![alt_text](https://github.com/Gitnuts/kafka_spark_project/blob/main/schema.png)
+![alt_text](https://github.com/Gitnuts/kafka_spark_project/blob/main/schema_2.png)
 
 # Local instalment
 
