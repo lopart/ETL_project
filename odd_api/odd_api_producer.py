@@ -1,8 +1,8 @@
 import requests
 import json
 
-API_KEY = 'YOUR_API_KEY'
-SPORT = 'basketball_nba'
+API_KEY = '9ccf1e3e97ee0089c6ba91f39ae5d6d9'
+SPORT = 'icehockey_nhl'
 REGIONS = 'eu'
 MARKETS = 'h2h'
 ODDS_FORMAT = 'decimal'
@@ -24,7 +24,7 @@ if odds_response.status_code != 200:
 
 else:
     odds_json = odds_response.json()
-    output_file = open("input_file.json", "w")
+    output_file = open("/usr/local/airflow/data/input_file.json", "w")
     json.dump(odds_json, output_file, indent = 2)
     output_file.close()
     print('Number of events:', len(odds_json))
