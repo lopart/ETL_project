@@ -3,13 +3,12 @@ from datetime import timedelta
 import airflow
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
+#from airflow.contrib.operators.spark_submit_operator import SparkSubmitOperator
 
-# These args will get passed on to each operator
-# You can override them on a per-task basis during operator initialization
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': airflow.utils.dates.days_ago(2),
+    'start_date': airflow.utils.dates.days_ago(1),
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
@@ -31,15 +30,33 @@ default_args = {
 }
 
 dag = DAG(
-    'example_1',
+    'ETL_pipeline',
     default_args=default_args,
-    description='A simple tutorial DAG',
-    schedule_interval=timedelta(days=1),
+    description='ETL pipeline for project',
+    schedule_interval="@daily",
 )
 
 t1 = BashOperator(
+   task_id='odd_api',
+   bash_command='python3 ~/dags/scripts/odd_api.py',
+   dag=dag,
+)
+
+t2 = BashOperator(
    task_id='kafka_input',
-   bash_command='python3 ~/dags/scripts/kafka_1.py',
+   bash_command='python3 ~/dags/scripts/kafka_producer.py',
+   dag=dag,
+)
+
+t3 = BashOperator(
+   task_id='structured_stream_output',
+   bash_command='python3 ~/dags/scripts/kafka_to_spark.py',
+   dag=dag,
+)
+
+t4 = BashOperator(
+   task_id='aws_s3_dataflow',
+   bash_command='python3 ~/dags/scripts/s3_sink.py',
    dag=dag,
 )
 
@@ -55,6 +72,4 @@ rendered in the UI's Task Instance Details page.
 """
 
 dag.doc_md = __doc__
-
-
-t1
+t1 >> t2 >> t3 >> t4
